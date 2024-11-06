@@ -1,6 +1,10 @@
 pipeline {
    agent any
     stages {
+       stage('Complete') {
+            steps {
+                echo 'Job Complete'
+            }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
