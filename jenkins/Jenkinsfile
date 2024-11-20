@@ -1,8 +1,7 @@
 pipeline {
     agent any
-    environment {
-        MAVEN_HOME = "/usr/share/maven" // Ścieżka do poprawnej wersji Maven
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}" // Upewnienie się, że używana jest właściwa wersja Maven
+    tools {
+        maven 'Maven-3.9.9' // Użyj nazwy skonfigurowanej w Jenkins Global Tool Configuration
     }
     stages {
         stage("Clean Up") {
@@ -13,13 +12,6 @@ pipeline {
         stage("Clone Repo") {
             steps {
                 sh "git clone https://github.com/jenkins-docs/simple-java-maven-app.git"
-            }
-        }
-        stage("Set Up Maven") {
-            steps {
-                script {
-                    sh 'mvn -version'
-                }
             }
         }
         stage("Build") {
